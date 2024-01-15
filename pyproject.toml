@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "django-plugins"
+version = "0.1.0"
+description = ""
+authors = ["Arkadiusz Adamski <arkadiusz.adamski@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+pyright = "^1.1.345"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.pylint."messages control"]
+ignore = ["setup.py", "__init__.py"]
+disable = "all"
+enable = [
+  "empty-docstring",
+  "missing-class-docstring",
+  "missing-function-docstring",
+  "missing-module-docstring",
+]
+
+[tool.isort]
+profile = "black"
+known_first_party = ["mycorp"]

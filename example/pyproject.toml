@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "example"
+version = "0.1.0"
+description = ""
+authors = ["Arkadiusz Adamski <arkadiusz.adamski@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.0"
+django-configurations = "^2.5"
+django-duke = "*"
+django-duke-sentry = "*"
+django-duke-debug-toolbar = "*"
+django-duke-browser-reload = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
