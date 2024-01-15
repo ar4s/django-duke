@@ -19,8 +19,23 @@ from duke import get_configuration_class
 DukeConfiguration = get_configuration_class()
 
 class Base(DukeConfiguration, Configuration):
-    ...
+    @property
+    def INSTALLED_APPS(self):
+        return super().INSTALLED_APPS + [
+            ...
+        ]
+    @property
+    def MIDDLEWARE(self):
+        return super().MIDDLEWARE + [
+            ...
+        ]
 ```
+
+!!! notice
+    You need to inherit from `DukeConfiguration` before `Configuration` to make sure that Duke's configuration is applied first.
+
+    Also you need to use `@property` decorator for `INSTALLED_APPS` and `MIDDLEWARE` properties to make sure that Duke's configuration is applied after your project's configuration.
+
 And finally, you need unpack urls from `duke.urls` into your project's `urls.py`:
 
 ```python
