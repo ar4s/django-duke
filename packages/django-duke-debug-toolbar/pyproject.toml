@@ -4,10 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Arkadiusz Adamski <arkadiusz.adamski@gmail.com>"]
 readme = "README.md"
-packages = [
-  { include = "duke_debug_toolbar*", from = "." },
-  { include = "duke_foo*", from = "." },
-]
+packages = [{ include = "duke_debug_toolbar*", from = "." }]
 
 [tool.poetry.dependencies]
 python = "^3.11"

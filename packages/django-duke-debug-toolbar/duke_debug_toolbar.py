@@ -2,13 +2,17 @@ import logging
 
 from configurations import values
 from django.urls import include, path
-from duke.common import build_plugin, build_plugin_manifest_from_package
+from duke.common import (
+    PluginConfiguration,
+    build_plugin,
+    build_plugin_manifest_from_package,
+)
 
 ENVIRON_PREFIX = "DEBUG_TOOLBAR"
 logger = logging.getLogger(__name__)
 
 
-class DebugToolbarConfiguration:
+class DebugToolbarConfiguration(PluginConfiguration):
     INTERNAL_IPS = values.ListValue(
         environ_prefix=ENVIRON_PREFIX, default=["127.0.0.1"]
     )

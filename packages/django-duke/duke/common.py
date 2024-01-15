@@ -2,9 +2,26 @@ from dataclasses import dataclass
 from typing import List, Optional, Type, Union
 
 import pkg_resources
-from configurations import Configuration
 from django.urls import URLPattern
 from django.urls.resolvers import URLResolver
+
+
+class PluginConfiguration:
+    """
+    Duck-typed class for plugin configuration.
+    See https://django-configurations.readthedocs.io/en/stable/values.html#overview
+    """
+
+    MIDDLEWARE: List[str] = []
+    INSTALLED_APPS: List[str] = []
+
+    @classmethod
+    def pre_setup(cls):
+        ...
+
+    @classmethod
+    def post_setup(cls):
+        ...
 
 
 @dataclass
@@ -17,7 +34,7 @@ class PluginManifest:
 
 @dataclass
 class Plugin:
-    configuration: Type[Configuration]
+    configuration: Type[PluginConfiguration]
     manifest: PluginManifest
 
 
@@ -28,5 +45,5 @@ def build_plugin_manifest_from_package(
     return PluginManifest(name, description, pkg.version, urls)
 
 
-def build_plugin(*, configuration: Type[Configuration], manifest: PluginManifest):
+def build_plugin(*, configuration: Type[PluginConfiguration], manifest: PluginManifest):
     return Plugin(configuration, manifest)

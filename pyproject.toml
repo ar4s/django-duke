@@ -6,6 +6,8 @@ authors = ["Arkadiusz Adamski <arkadiusz.adamski@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.5.4"
 
 
 [tool.poetry.group.dev.dependencies]

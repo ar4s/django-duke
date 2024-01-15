@@ -2,14 +2,18 @@ import logging
 
 import sentry_sdk
 from configurations import values
-from duke.common import build_plugin, build_plugin_manifest_from_package
+from duke.common import (
+    PluginConfiguration,
+    build_plugin,
+    build_plugin_manifest_from_package,
+)
 from sentry_sdk.integrations.django import DjangoIntegration
 
 ENVIRON_PREFIX = "SENTRY"
 logger = logging.getLogger(__name__)
 
 
-class SentryConfiguration:
+class SentryConfiguration(PluginConfiguration):
     DSN = values.Value(environ_prefix=ENVIRON_PREFIX, default=None)
     TRACING = values.BooleanValue(environ_prefix=ENVIRON_PREFIX, default=False)
 

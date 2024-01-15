@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "django-duke-sentry"
-version = "0.1.2"
+version = "0.1.0"
 description = ""
 authors = ["Arkadiusz Adamski <arkadiusz.adamski@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "duke_sentry", from = "." }]
+packages = [{ include = "duke_sentry.py", from = "." }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
