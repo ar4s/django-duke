@@ -435,16 +435,30 @@ poetry<span class="w"> </span>add<span class="w"> </span>django-configuration<sp
 </code></pre></div>
 <p>Then, you need to modify a <code>settings.py</code>, <code>manage.py</code>, <code>wsgi.py</code> and <code>asgi.py</code> file in your project's root directory according to the <a href="https://django-configurations.readthedocs.io/en/stable/#quickstart">django-configuration documentation</a>.</p>
 <p>Next step is to get Duke's configuration class. You can do this by importing <code>DukeConfiguration</code> from <code>django-duke</code>:</p>
-<p><div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># settings.py</span>
 <span class="kn">from</span> <span class="nn">configurations</span> <span class="kn">import</span> <span class="n">Configuration</span>
 <span class="kn">from</span> <span class="nn">duke</span> <span class="kn">import</span> <span class="n">get_configuration_class</span>
 
 <span class="n">DukeConfiguration</span> <span class="o">=</span> <span class="n">get_configuration_class</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">DukeConfiguration</span><span class="p">,</span> <span class="n">Configuration</span><span class="p">):</span>
-    <span class="o">...</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">INSTALLED_APPS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">INSTALLED_APPS</span> <span class="o">+</span> <span class="p">[</span>
+            <span class="o">...</span>
+        <span class="p">]</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">MIDDLEWARE</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">MIDDLEWARE</span> <span class="o">+</span> <span class="p">[</span>
+            <span class="o">...</span>
+        <span class="p">]</span>
 </code></pre></div>
-And finally, you need unpack urls from <code>duke.urls</code> into your project's <code>urls.py</code>:</p>
+<div class="admonition notice">
+<p class="admonition-title">Notice</p>
+<p>You need to inherit from <code>DukeConfiguration</code> before <code>Configuration</code> to make sure that Duke's configuration is applied first.</p>
+<p>Also you need to use <code>@property</code> decorator for <code>INSTALLED_APPS</code> and <code>MIDDLEWARE</code> properties to make sure that Duke's configuration is applied after your project's configuration.</p>
+</div>
+<p>And finally, you need unpack urls from <code>duke.urls</code> into your project's <code>urls.py</code>:</p>
 <p><div class="highlight"><pre><span></span><code><span class="c1"># urls.py</span>
 <span class="kn">from</span> <span class="nn">duke</span> <span class="kn">import</span> <span class="n">get_urls</span>
 
